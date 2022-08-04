@@ -1,5 +1,12 @@
 # Using PicKit4 for AVR MCU programming in Arduino
 
+## Summary
+
+* compile and install the latest AVRDUDE tool
+* connect PicKit4 to the AVR-ISP connector
+* set correct fuse byte by running `$ avrdude -c pickit4_isp -p m328p -U lfuse:w:0xFF:m`
+* write HEX to the MCU by running `avrdude -c pickit4_isp -p m328p -U flash:w:filename.hex`
+
 ## Compile and Install the latest version of AVRDUDE
 
 PicKit4 support is available on AVRDUDE v7.0 or grater.
@@ -97,7 +104,7 @@ $ avrdude -c pickit4_isp -p m328p -U lfuse:w:0xFF:m
 Now complile any Arduino code in the Arduino IDE with the "Arduino UNO" board selected. And write it to the board.
 
 ```
-avrdude -c pickit4_isp -p m328p -U flash:w:filename.hex
+$ avrdude -c pickit4_isp -p m328p -U flash:w:filename.hex
 ```
 
 ## Troubleshooting
