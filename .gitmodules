@@ -7,3 +7,6 @@
 [submodule "submodules/avrdude"]
 	path = submodules/avrdude
 	url = https://github.com/avrdudes/avrdude
+[submodule "submodules/GxEPD"]
+	path = submodules/GxEPD
+	url = https://github.com/ZinggJM/GxEPD
