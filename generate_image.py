@@ -5,8 +5,8 @@ from PIL import Image, ImageOps
 from pathlib import Path
 
 im = Image.open("image.png")
-im = ImageOps.invert(im.convert("1"))
-im = im.transpose(Image.Transpose.ROTATE_90)
+im = im.convert("1")
+im = im.transpose(Image.Transpose.TRANSVERSE)
 
 source = open("fw/image.c","w")
 header = open("fw/image.h","w")
