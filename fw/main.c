@@ -15,7 +15,7 @@
 #define RST_PORT B
 #define RST_PIN 0
 #define CS_PORT B
-#define CS_PIN 3
+#define CS_PIN 2
 #define BUSY_PORT D
 #define BUSY_PIN 7
 
