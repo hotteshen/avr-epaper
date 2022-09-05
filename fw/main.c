@@ -88,7 +88,7 @@ void reset(void)
 
 void writecom(uint8_t data)
 {
-	PORT(DC_PORT) &= !(1<<DC_PIN);
+	PORT(DC_PORT) &= ~(1<<DC_PIN);
 	PORT(CS_PORT) &= ~(1UL<<CS_PIN);
 	spi_send_byte(data);
 	PORT(CS_PORT) |= (1<<CS_PIN);
