@@ -49,6 +49,11 @@ void spi_init(void)
 {
 	/* Set MOSI and SCK output, all others input */
 	DDRB = (1<<3)|(1<<5);
+
+	DDR(DC_PORT) |= (1<<DC_PIN);
+	DDR(RST_PORT) |= (1<<RST_PIN);
+	DDR(CS_PORT) |= (1<<CS_PIN);
+
 	/* Enable SPI, Master, set clock rate fck/16 */
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
 }
@@ -93,7 +98,9 @@ void writedata(uint8_t data)
 {
 	PORT(DC_PORT) |= (1<<DC_PIN);
 	PORT(CS_PORT) &= ~(1UL<<CS_PIN);
+	putcu('q');
 	spi_send_byte(data);
+	putcu('w');
 	PORT(CS_PORT) |= (1<<CS_PIN);
 }
 
@@ -281,18 +288,8 @@ void uart_init(void)
 
 int main(void)
 {
-	//spi_init();
-	DDR(DC_PORT) |= (1<<DC_PIN);
-	DDR(RST_PORT) |= (1<<RST_PIN);
-	DDR(CS_PORT) |= (1<<CS_PIN);
+	spi_init();
 	DDR(BUSY_PORT) &= ~(1UL<<BUSY_PIN);
-
-	while (1){
-		PORT(RST_PORT) |= (1<<RST_PIN);
-		_delay_ms(10);
-		PORT(RST_PORT) &= ~(1UL<<RST_PIN);
-		_delay_ms(10);
-	}
 
 	uart_init();
 	putcu('A');
