@@ -54,8 +54,8 @@ void spi_init(void)
 	DDR(RST_PORT) |= (1<<RST_PIN);
 	DDR(CS_PORT) |= (1<<CS_PIN);
 
-	/* Enable SPI, Master, set clock rate fck/16 */
-	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+	/* Enable SPI, Master, set clock rate fck/128 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR1)|(1<<SPR0);
 }
 
 void spi_send_byte(uint8_t byte)
