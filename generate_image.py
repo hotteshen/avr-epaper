@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 from pathlib import Path
 
 im = Image.open("image.png")
-im = im.convert("L")
+im = im.convert("1")
 
 source = open("fw/image.c","w")
 header = open("fw/image.h","w")
@@ -23,7 +23,7 @@ def gen_image(tgt):
     for x in range(w):
         for y in range(h):
             if(data_raw[y*(w//8)+x//8]&(1<<(7-x%8))):
-                data[x//8*h+(y//8)] &= ~(1<<(x%8))
+                data[x//8*h+y] &= ~(1<<(x%8))
     
     line_buffer = []
     for p in data:
