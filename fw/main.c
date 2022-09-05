@@ -311,7 +311,7 @@ int main(void)
 	init();
 	putcu('B');
 
-	while(1)
+	//while(1)
 	{
 		putcu('C');
 
