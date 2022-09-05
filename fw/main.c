@@ -102,6 +102,7 @@ void writedata(uint8_t data)
 	spi_send_byte(data);
 	//putcu('w');
 	PORT(CS_PORT) |= (1<<CS_PIN);
+	PORT(DC_PORT) &= ~(1UL<<DC_PIN);
 }
 
 void lut_5S(void)
