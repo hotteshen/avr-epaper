@@ -110,34 +110,34 @@ void lut_5S(void)
 	  unsigned int count;
 	  writecom(0x20);
 	    for(count=0;count<80;count++)
-	      { writedata(lut_R20_5S[count]);  }
+	      { writedata(pgm_read_byte(&lut_R20_5S[count]));  }
 
 	  writecom(0x21);
 	    for(count=0;count<56;count++)
-	      {writedata(lut_R21_5S[count]);}
+	      {writedata(pgm_read_byte(&lut_R21_5S[count]));}
 
 	  writecom(0x24);
 	    for(count=0;count<80;count++)
-	      {writedata(lut_R24_5S[count]);}
+	      {writedata(pgm_read_byte(&lut_R24_5S[count]));}
 
 	  if (LUT_Flag==0)
 	  {
 	    writecom(0x22);
 	      for(count=0;count<80;count++)
-	        {writedata(lut_R22_5S[count]);}
+	        {writedata(pgm_read_byte(&lut_R22_5S[count]));}
 	    writecom(0x23);
 	      for(count=0;count<80;count++)
-	        {writedata(lut_R23_5S[count]);}
+	        {writedata(pgm_read_byte(&lut_R23_5S[count]));}
 	    LUT_Flag=1;
 	  }
 	  else
 	  {
 	    writecom(0x22);
 	      for(count=0;count<80;count++)
-	        {writedata(lut_R23_5S[count]);}
+	        {writedata(pgm_read_byte(&lut_R23_5S[count]));}
 	    writecom(0x23);
 	      for(count=0;count<80;count++)
-	        {writedata(lut_R22_5S[count]);}
+	        {writedata(pgm_read_byte(&lut_R22_5S[count]));}
 	    LUT_Flag=0;
 	  }
 }
@@ -147,34 +147,34 @@ void lut_DU(void)
   unsigned int count;
   writecom(0x20);
     for(count=0;count<80;count++)
-      { writedata(lut_R20_DU[count]);  }
+      { writedata(pgm_read_byte(&lut_R20_DU[count]));  }
 
   writecom(0x21);
     for(count=0;count<56;count++)
-      {writedata(lut_R21_DU[count]);}
+      {writedata(pgm_read_byte(&lut_R21_DU[count]));}
 
   writecom(0x24);
     for(count=0;count<80;count++)
-      {writedata(lut_R24_DU[count]);}
+      {writedata(pgm_read_byte(&lut_R24_DU[count]));}
 
   if (LUT_Flag==0)
   {
     writecom(0x22);
       for(count=0;count<80;count++)
-        {writedata(lut_R22_DU[count]);}
+        {writedata(pgm_read_byte(&lut_R22_DU[count]));}
     writecom(0x23);
       for(count=0;count<80;count++)
-        {writedata(lut_R23_DU[count]);}
+        {writedata(pgm_read_byte(&lut_R23_DU[count]));}
     LUT_Flag=1;
   }
   else
   {
     writecom(0x22);
       for(count=0;count<80;count++)
-        {writedata(lut_R23_DU[count]);}
+        {writedata(pgm_read_byte(&lut_R23_DU[count]));}
     writecom(0x23);
       for(count=0;count<80;count++)
-        {writedata(lut_R22_DU[count]);}
+        {writedata(pgm_read_byte(&lut_R22_DU[count]));}
     LUT_Flag=0;
   }
 }
