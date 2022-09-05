@@ -309,7 +309,7 @@ int main(void)
 		writecom(0x17); //update
 		writedata(0xA5);
 		waitforready();
-		_delay_ms(10000);
+		_delay_ms(1000);
 		putcu('D');
 
 		writecom(0x13); // send data
@@ -318,7 +318,7 @@ int main(void)
 		writecom(0x17); //update
 		writedata(0xA5);
 		waitforready();
-		_delay_ms(10000);
+		_delay_ms(1000);
 
 	}
 
