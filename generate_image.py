@@ -22,7 +22,7 @@ def gen_image(tgt):
     for x in range(w):
         for y in range(h):
             if(data_raw[y*(w//8)+x//8]&(1<<(7-x%8))):
-                data[x//8*(h//8)+y] &= ~(1<<(x%8))
+                data[x*h//8+(y//8)] &= ~(1<<(y%8))
     print(len(data))
     line_buffer = []
     for p in data:
