@@ -256,7 +256,7 @@ void init(void)
 	writecom(0xb7);
 
 	writecom(0x13); // send data
-	send_black();
+	send_white();
 	lut_5S();
 	writecom(0x17); //update
 	writedata(0xA5);
@@ -314,7 +314,7 @@ int main(void)
 
 		writecom(0x13); // send data
 		send_black();
-		lut_DU();
+		//lut_DU();
 		writecom(0x17); //update
 		writedata(0xA5);
 		waitforready();
