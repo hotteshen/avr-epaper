@@ -6,10 +6,13 @@
  */
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <stdint.h>
 #include <util/delay.h>
 #include "WaveInit.h"
 #include <image.h>
+#include <tlay2.h>
+
 
 #define DC_PORT B
 #define DC_PIN 1
@@ -37,14 +40,6 @@
 #define PIN(port)  PIN_(port)
 
 unsigned char LUT_Flag;
-
-void putcu(char c)
-{
-	/* Wait for empty transmit buffer */
-	while (!(UCSR0A & (1<<UDRE0)));
-	/* Put data into buffer, sends the data */
-	UDR0 = c;
-}
 
 void spi_init(void)
 {
@@ -74,7 +69,6 @@ void waitforready(void)
 
 void reset(void)
 {
-	putcu('G');
 	PORT(CS_PORT) |= (1<<CS_PIN);
 	PORT(RST_PORT) |= (1<<RST_PIN);
 	_delay_ms(10);
@@ -84,7 +78,6 @@ void reset(void)
 	_delay_ms(10);
 	waitforready();
 	LUT_Flag=0;
-	putcu('H');
 }
 
 void writecom(uint8_t data)
@@ -99,9 +92,7 @@ void writedata(uint8_t data)
 {
 	PORT(DC_PORT) |= (1<<DC_PIN);
 	PORT(CS_PORT) &= ~(1UL<<CS_PIN);
-	//putcu('q');
 	spi_send_byte(data);
-	//putcu('w');
 	PORT(CS_PORT) |= (1<<CS_PIN);
 	PORT(DC_PORT) &= ~(1UL<<DC_PIN);
 }
@@ -272,33 +263,10 @@ void init(void)
 	lut_5S();
 	writecom(0x17); //update
 	writedata(0xA5);
-	putcu('q');
 	waitforready();
-	putcu('w');
 	_delay_ms(1000);
 	writecom(0x50);
 	writedata(0xD7);
-}
-
-void uart_init(void)
-{
-	DDRD |=(1<<1);
-	UCSR0A =0;
-
-	#define BAUD 9600
-	#include <util/setbaud.h>
-	UBRR0H = UBRRH_VALUE;
-	UBRR0L = UBRRL_VALUE;
-	#if USE_2X
-	UCSR0A |= (1UL << U2X0);
-	#else
-	UCSR0A &= ~(1UL << U2X0);
-	#endif
-
-	UCSR0B = (1 << TXEN0);
-	UCSR0C = (1 << UCSZ00) | (1 << UCSZ01);
-
-
 }
 
 int main(void)
@@ -306,15 +274,10 @@ int main(void)
 	spi_init();
 	DDR(BUSY_PORT) &= ~(1UL<<BUSY_PIN);
 
-	uart_init();
-	putcu('A');
 	init();
-	putcu('B');
 
 	//while(1)
 	{
-		putcu('C');
-
 		writecom(0x13); // send data
 		send_white();
 		lut_DU();
@@ -322,7 +285,6 @@ int main(void)
 		writedata(0xA5);
 		waitforready();
 		_delay_ms(1000);
-		putcu('D');
 
 		writecom(0x13); // send data
 		send_image();
@@ -330,8 +292,22 @@ int main(void)
 		writecom(0x17); //update
 		writedata(0xA5);
 		waitforready();
-		_delay_ms(1000);
+		//_delay_ms(1000);
 
+	}
+	tlay2_init();
+	sei();
+	while(1)
+	{
+		if(tlay2_check())
+		{
+			uint8_t *buff = tlay2_get_data();
+			uint8_t len = tlay2_get_len();
+			tlay2_tx_init_reply();
+			tlay2_tx_byte(0xff);
+			tlay2_tx_end();
+			tlay2_reset();
+		}
 	}
 
 	return 0;
