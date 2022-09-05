@@ -305,7 +305,7 @@ int main(void)
 
 		writecom(0x13); // send data
 		send_white();
-		lut_DU();
+		//lut_DU();
 		writecom(0x17); //update
 		writedata(0xA5);
 		waitforready();
