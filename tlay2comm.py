@@ -43,5 +43,5 @@ def recv():
             c = bytes([(ser.read()[0] ^ 0x80)])
         buff+=c
     
-sendpkt(b"")
+sendpkt(b"\x00")
 print(recv())

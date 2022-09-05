@@ -58,7 +58,7 @@ uint8_t tlay2_check()
 		tlay2_rx_len-=1;
 		if(c != '\n')
 			return 0;
-		if (tlay2_rx_len < 2)
+		if (tlay2_rx_len < 1)
 			return 0;
 		if (crc != 0)
 			return 0;
