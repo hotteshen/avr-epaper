@@ -17,12 +17,13 @@ def gen_hdr(tgt):
 def gen_image(tgt):
     data_raw = im.tobytes()
     w,h = im.size
+    wn = (w+7)//8*8
     print(w,h)
-    data = bytearray([255])*(w//8)*h
+    data = bytearray([255])*(wn//8)*h
     for x in range(w):
         for y in range(h):
             if(data_raw[y*(w//8)+x//8]&(1<<(7-x%8))):
-                data[x//8+(1-(y//8))*8*w//8] &= ~(1<<(x%8))
+                data[x//8*h+(y//8)] &= ~(1<<(x%8))
     
     line_buffer = []
     for p in data:
