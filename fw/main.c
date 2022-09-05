@@ -98,9 +98,9 @@ void writedata(uint8_t data)
 {
 	PORT(DC_PORT) |= (1<<DC_PIN);
 	PORT(CS_PORT) &= ~(1UL<<CS_PIN);
-	putcu('q');
+	//putcu('q');
 	spi_send_byte(data);
-	putcu('w');
+	//putcu('w');
 	PORT(CS_PORT) |= (1<<CS_PIN);
 }
 
