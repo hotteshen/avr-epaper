@@ -303,10 +303,42 @@ int main(void)
 		{
 			uint8_t *buff = tlay2_get_data();
 			uint8_t len = tlay2_get_len();
-			tlay2_tx_init_reply();
-			tlay2_tx_byte(0xff);
-			tlay2_tx_end();
-			tlay2_reset();
+			if(buff[0] == 0x00)
+			{
+				tlay2_tx_init_reply();
+				tlay2_tx_byte(0xff);
+				tlay2_tx_end();
+				tlay2_reset();
+			}
+			else if(buff[0] == 1)
+			{
+				uint16_t x=tlay2_rx_u16(&buff[1]);
+				writecom(0x90);
+				writedata(0x00);
+				writedata(0x7f);
+				writedata(x>>8);
+				writedata(x);
+				x+=1;
+				writedata(x>>8);
+				writedata(x);
+				writedata(0x01);
+				writecom(0x13); // send data
+				for(uint8_t i=3;i<16+3;i++)
+					writedata(buff[i]);
+				tlay2_tx_init_reply();
+				tlay2_tx_end();
+				tlay2_reset();
+			}
+			else if(buff[0] == 2)
+			{
+				lut_DU();
+				writecom(0x17); //update
+				writedata(0xA5);
+				waitforready();
+				tlay2_tx_init_reply();
+				tlay2_tx_end();
+				tlay2_reset();
+			}
 		}
 	}
 
