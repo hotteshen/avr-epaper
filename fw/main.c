@@ -259,7 +259,9 @@ void init(void)
 	lut_5S();
 	writecom(0x17); //update
 	writedata(0xA5);
+	putcu('q');
 	waitforready();
+	putcu('w');
 	_delay_ms(1000);
 	writecom(0x50);
 	writedata(0xD7);
