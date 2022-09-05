@@ -9,6 +9,7 @@
 #include <stdint.h>
 #include <util/delay.h>
 #include "WaveInit.h"
+#include <image.h>
 
 #define DC_PORT B
 #define DC_PIN 1
@@ -205,6 +206,17 @@ void send_black(void)
 	}
 }
 
+void send_image(void)
+{
+	unsigned int pixels;
+
+	for (pixels = 0; pixels < Picture_length ; pixels++)
+			{
+
+			writedata(pgm_read_byte(&my_image_[pixels]));
+	}
+}
+
 void init(void)
 {
 	reset();
@@ -313,7 +325,7 @@ int main(void)
 		putcu('D');
 
 		writecom(0x13); // send data
-		send_black();
+		send_image();
 		lut_DU();
 		writecom(0x17); //update
 		writedata(0xA5);
