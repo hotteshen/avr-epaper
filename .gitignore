@@ -1,2 +1,14 @@
 .junk/
 spike*
+.cproject
+.project
+.settings/*
+*/.dep/*
+*.lst
+*.o
+*.eep
+*.elf
+*.hex
+*.lss
+*.map
+*.sym

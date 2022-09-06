@@ -318,7 +318,7 @@ int main(void)
 				writedata(0x7f);
 				writedata(x>>8);
 				writedata(x);
-				x+=1;
+				//x+=1;
 				writedata(x>>8);
 				writedata(x);
 				writedata(0x01);
