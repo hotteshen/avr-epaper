@@ -297,6 +297,7 @@ int main(void)
 	}
 	tlay2_init();
 	sei();
+	uint16_t last_y =0;
 	while(1)
 	{
 		if(tlay2_check())
@@ -309,22 +310,18 @@ int main(void)
 				tlay2_tx_byte(0xff);
 				tlay2_tx_end();
 				tlay2_reset();
+				last_y = 0;
+				writecom(0x13); // send data
 			}
 			else if(buff[0] == 1)
 			{
-				uint16_t x=tlay2_rx_u16(&buff[1]);
-				writecom(0x90);
-				writedata(0x00);
-				writedata(0x7f);
-				writedata(x>>8);
-				writedata(x);
-				//x+=1;
-				writedata(x>>8);
-				writedata(x);
-				writedata(0x01);
-				writecom(0x13); // send data
-				for(uint8_t i=3;i<16+3;i++)
-					writedata(buff[i]);
+				uint16_t y=tlay2_rx_u16(&buff[1]);
+				if (last_y == y)
+				{
+					for(uint8_t i=3;i<16+3;i++)
+						writedata(buff[i]);
+					last_y +=1;
+				}
 				tlay2_tx_init_reply();
 				tlay2_tx_end();
 				tlay2_reset();
