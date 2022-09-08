@@ -9,7 +9,7 @@
 
 ## Compile and Install the latest version of AVRDUDE
 
-PicKit4 support is available on AVRDUDE v7.0 or grater.
+PicKit4 support is available on AVRDUDE v7.0 or greater.
 At this time of writing, AVRDUDE in Ubuntu package repository is version 6.3
 Thus clone the AVRDUDE's source repository and build it manually.
 
