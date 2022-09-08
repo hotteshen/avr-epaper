@@ -4,12 +4,18 @@ import sys
 from PIL import Image, ImageOps
 from pathlib import Path
 
-im = Image.open("image.png")
+import sys,os
+
+im = Image.open(sys.argv[1])
+
+if im.size[0] != 250 or im.size[1] != 128:
+    raise Exception("not correct image")
+
 im = im.convert("1")
 im = im.transpose(Image.Transpose.TRANSVERSE)
 
-source = open("fw/image.c","w")
-header = open("fw/image.h","w")
+source = open(os.path.dirname(__file__) + "/../src/image.c","w")
+header = open(os.path.dirname(__file__) + "/../src/image.h","w")
 
 def gen_hdr(tgt):
     tgt.write('const PROGMEM unsigned char my_image_[] ')
