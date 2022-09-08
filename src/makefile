@@ -70,7 +70,7 @@ FORMAT = ihex
 
 
 # Target file name (without extension).
-TARGET = main
+TARGET = build/main
 
 
 # Object files directory
@@ -80,7 +80,7 @@ OBJDIR = build
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = $(TARGET).c image.c uart.c tlay2.c
+SRC = main.c image.c uart.c tlay2.c
 
 
 # List C++ source files here. (C dependencies are automatically generated.)
