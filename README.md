@@ -1,4 +1,4 @@
-# TagRyte E-paper Display Dock
+# ShineWorld 2.13in Epaper Driver for AVR MCU
 
 ## Hardware
 
