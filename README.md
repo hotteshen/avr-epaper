@@ -1,6 +1,34 @@
 # ShineWorld 2.13in ePaper Driver for AVR MCU
 
 
+## Quickstart (Ubuntu)
+
+Install AVR-GCC toolchain and make Python virtual environment.
+
+(For PicKit4 users: AVRDUDE of Ubuntu repository does not support PicKit4. In this case, install AVRDUDE manually. For installing the latest AVRDUDE, see [Using PicKit4 for AVR MCU programming in Arduino](doc/pickit4-arduino-avr.md).)
+
+```
+$ sudo apt install gcc-avr avrdude avr-libc
+$ sudo apt install python3-pip
+$ python3 -m venv devenv
+(devenv) $ pip install -r scripts/requirements.txt
+```
+
+Compile and program
+
+```
+$ cd src
+$ make
+$ avrdude -c pickit4_isp -p m328p -U flash:w:main.hex
+```
+
+Transfer image data to MCU to display.
+
+```
+$ cd ..
+$ python scripts/tlay2comm.py doc/example.png
+```
+
 ## Motivation
 
 While doing a ePaper (or E-Ink) related project, I found that there was no public driver library for [ShineWorld's epapers](https://shineworld.en.alibaba.com/productgrouplist-806500286/EPD.html).
