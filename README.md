@@ -15,8 +15,10 @@ I contacted the ShineWorld company and they provided an example code written for
 
 ## Hardware
 
-![Development Hardware Setup](./doc/tagryte-pickit4-connection.png)
-
 I got two custom made PCB.
 * [ePaper adapter board](doc/sch-epaper-board.pdf), which is a copy of common ePaper driving adapters like [WaveShare E-Paper Driver HAT](https://www.waveshare.com/wiki/E-Paper_Driver_HAT).
 * [MCU board](doc/sch-mcu-board.pdf), which is a copy of [Arduino UNO R3](doc/arduino-uno-r3.pdf). However, USB-UART chip is omitted and it is connected to external USB-UART adapter via FPC cable.
+
+I connected [PicKit4](https://www.microchip.com/pickit4) and CH340 USB-UART adapter to the MCU board.
+
+![Development Hardware Setup](./doc/tagryte-pickit4-connection.png)
