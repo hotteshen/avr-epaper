@@ -23,7 +23,7 @@ def sendpkt(data):
         buff+=bytes([byte])
     buff+=b'\n'
     ser.write(buff)
-    
+
 
 def recv():
     buff=b""
@@ -42,7 +42,8 @@ def recv():
         if c == b"\xdc":
             c = bytes([(ser.read()[0] ^ 0x80)])
         buff+=c
-    
+
+
 sendpkt(b"\x00")
 print(recv())
 
@@ -57,7 +58,7 @@ im = im.transpose(Image.Transpose.TRANSVERSE)
 w,h = im.size
 
 if w != 128 or h!=250:
-    raise Exception("Bad image")
+    raise Exception("Bad image: image size must be 250 * 128.")
 
 data_raw = im.tobytes()
 for y in range(h):
@@ -76,5 +77,4 @@ for y in range(h):
 sendpkt(struct.pack("<B",0x02))
 recv()
 
-print("sent image")
-            
+print("image sent")
