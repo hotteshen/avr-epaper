@@ -58,3 +58,8 @@ I had some issues on the first try using PicKit4 for programming.
 I had to manually compile the recent version of [AVRDUDE](https://github.com/avrdudes/avrdude) and change ATmega328p's fuse bytes to use external 16MHz crystal just like on Arduino UNO.
 
 For more details, I seperated this into another document [Using PicKit4 for AVR MCU programming in Arduino](doc/pickit4-arduino-avr.md)
+
+
+## License
+
+[The MIT License](https://opensource.org/licenses/MIT)
