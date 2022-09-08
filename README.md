@@ -60,6 +60,19 @@ I had to manually compile the recent version of [AVRDUDE](https://github.com/avr
 For more details, I seperated this into another document [Using PicKit4 for AVR MCU programming in Arduino](doc/pickit4-arduino-avr.md)
 
 
+## Limitations
+
+Although I named this project as "ePaper Driver", this has only very basic feature.
+The firmware just displays the image data received from UART.
+It should have common functions like
+
+* `print('c', x, y)`
+* `printf("string")`
+* ...
+
+Any contribution will be appreciated.
+
+
 ## License
 
 [The MIT License](https://opensource.org/licenses/MIT)
