@@ -1,4 +1,4 @@
-# ShineWorld 2.13in ePaper Driver for AVR MCU
+# PCBCrew ™ ShineWorld ™ 2.13in ePaper Driver for AVR MCU
 
 ![ePaper with TagRyte Boards](doc/tagryte-hardware.png)
 
